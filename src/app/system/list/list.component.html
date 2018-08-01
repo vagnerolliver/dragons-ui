@@ -1,3 +1,30 @@
 <p>
-  list works!
+  Lista de Dragões
 </p>
+<table>
+  <thead>
+      <tr> 
+        <th>Data de criação</th>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Ação</th>
+        <td><a routerLink="/system/cadastrar">Novo</a></td>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dragon of dragons | orderBy: 'name'; let i = index">
+        <td>{{dragon?.created_at | date: 'dd/MM/yyyy'}}</td>
+        <td>{{dragon?.name}}</td>
+        <td>{{dragon?.type}}</td>
+        <td>
+          <a [routerLink]="'/system/details/'+dragon?.slug">Details</a> | 
+          <a [routerLink]="'/system/editar/'+dragon?.slug" href="#">Alterar</a> |
+          <a (click)="deleteDragon(dragon?.slug); $event.preventDefault();" href="#">Excluir</a>
+        </td>
+        <td></td>
+    </tr>
+  </tbody>
+  <tfoot style="text-align: center;">
+      <a *ngFor="let page of pages; let page = index" style="display: inline-block; font-size: 20px;" (click)="addPage(page); $event.preventDefault();" href=""> {{ page + 1 }} | </a>
+  </tfoot>
+</table>

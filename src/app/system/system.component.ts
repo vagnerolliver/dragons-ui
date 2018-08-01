@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-system',
   templateUrl: './system.component.html',
-  styleUrls: ['./system.component.css']
+  styleUrls: ['./system.component.scss']
 })
 export class SystemComponent implements OnInit {
 
@@ -11,5 +11,6 @@ export class SystemComponent implements OnInit {
 
   ngOnInit() {
   }
-
+ 
 }
+ 
