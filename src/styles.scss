@@ -1,6 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
- body {
-   a {
-     color: blue;
-   }
- }
+@import "./sass/base/variables";
+@import "./sass/base/mixins";
+
+@import "./sass/base/normalize";
+@import "./sass/base/reset";
+@import "./sass/base/page";
+
+@import "./sass/ui-components/ui-grid";
+@import "./sass/ui-components/ui-forms";
+
+

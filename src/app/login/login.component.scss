@@ -1,5 +1,24 @@
-:host ::ng-deep { 
- .form-group {
-   margin-bottom: 20px;
- }
+// Core variables and mixins
+@import "./src/sass/base/variables";
+@import "./src/sass/base/mixins";
+
+:host ::ng-deep {
+  .login-content {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+
+    h1 {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 300;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    &-wrap {
+      @include absolute-center();
+      width: 250px;
+    }
+  }
 }

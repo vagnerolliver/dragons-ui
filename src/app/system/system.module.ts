@@ -13,7 +13,7 @@ import { FormComponent } from './form/form.component';
   imports: [
     CommonModule,
     SystemRoutingModule,
-    OrderModule, 
+    OrderModule,
     ReactiveFormsModule,
   ],
   declarations: [ListComponent, DetailsComponent, FormComponent],

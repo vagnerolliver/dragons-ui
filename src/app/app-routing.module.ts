@@ -4,13 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guards';
 
 export const AppRoutes: Routes = [
-  { path: '', 
-    loadChildren: './login/login.module#LoginModule', 
-    pathMatch: 'full' 
+  { path: '',
+    loadChildren: './login/login.module#LoginModule',
+    pathMatch: 'full'
   },
-  { path: 'system', 
+  { path: 'system',
     loadChildren: './system/system.module#SystemModule',
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   }
 ];
 

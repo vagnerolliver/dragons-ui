@@ -15,12 +15,12 @@ import { ErrorHandlerService } from '../../services/errorHandler.service';
 })
 export class DetailsComponent implements OnInit, OnDestroy {
   subscription: Subscription;
-  routeSubscription: Subscription; 
+  routeSubscription: Subscription;
 
   dragon: Dragon;
 
   constructor(
-    private systemService: SystemService, 
+    private systemService: SystemService,
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,
@@ -32,7 +32,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       (params) => {
         if (params['slug']) {
           this.fetchDragon(params['slug']);
-        } else {  
+        } else {
           this.toastr.error('Ocorreu um erro inesperado.', 'System Dragons');
         }
       }
@@ -47,7 +47,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   fetchDragon(slug): void {
     this.subscription = this.systemService.getDragon(slug).subscribe(
         (data: any) => {
-          this.dragon = data; 
+          this.dragon = data;
           this.systemService.addTitle(`Dragons - ${data.name}`);
          },
          (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Get Dragons')

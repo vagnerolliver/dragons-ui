@@ -1,8 +1,11 @@
 
+<app-header *ngIf="isLogged"></app-header>
 
-<div *ngIf="isLogged">Olá <span>{{ name }}</span></div>
+<div *ngIf="!isLogged" class="dragons-bg"></div>
 
-<div *ngIf="isLogged"><a (click)="logout(); $event.preventDefault()" routerLink="/">Sair</a></div>
+<main class="site-main">
+  <router-outlet></router-outlet>
+</main>
 
-<router-outlet></router-outlet>
+<app-footer></app-footer>
 

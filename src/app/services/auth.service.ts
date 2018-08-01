@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { SystemContentService } from './system-content.service';
 
 @Injectable()
 export class AuthService {
@@ -20,6 +21,7 @@ export class AuthService {
   ];
 
   constructor(
+    private systemContentService: SystemContentService,
     private router: Router,
     private toastr: ToastrService
   ) {  }
@@ -39,17 +41,19 @@ export class AuthService {
         this.toastr.error('Senha inválida', 'Dragons Login');
         return false;
       }
-    }  
+    }
 
     localStorage.setItem('logged', 'true');
     localStorage.setItem('name', this.user.nome);
 
+    this.systemContentService.document.body.classList.remove('page-login');
     this.router.navigate(['/system']);
   }
 
   logout() {
     localStorage.removeItem('logged');
     localStorage.removeItem('name');
+    this.systemContentService.document.body.classList.add('page-login');
     this.router.navigate(['/']);
   }
 
