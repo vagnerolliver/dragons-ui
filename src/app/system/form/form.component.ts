@@ -15,21 +15,21 @@ import { SystemService } from '../system.service';
 export class FormComponent implements OnInit {
 
   page: string;
-  
+
   subscription: Subscription;
-  routeSubscription: Subscription; 
+  routeSubscription: Subscription;
 
   form: FormGroup;
   dragon: any = {};
 
   constructor(
-    private systemService: SystemService, 
+    private systemService: SystemService,
     private route: ActivatedRoute,
     private router: Router,
     public formBuilder: FormBuilder,
     private toastr: ToastrService,
     private errorHandler: ErrorHandlerService
-  ) { 
+  ) {
     this.createFormBuilder();
   }
 
@@ -38,12 +38,12 @@ export class FormComponent implements OnInit {
       (params) => {
         if ( params['slug'] ) {
           this.page = 'update';
-          this.systemService.slug = params['slug']; 
+          this.systemService.slug = params['slug'];
           this.systemService.addTitle('Editar Dragon');
           this.fetchDragon(params['slug']);
         } else {
           this.systemService.addTitle('New Dragon');
-          this.page = 'new'; 
+          this.page = 'new';
           this.createFormBuilder();
         }
       }
@@ -54,14 +54,14 @@ export class FormComponent implements OnInit {
     this.form =  this.formBuilder.group({
        name:  [this.dragon.name ? this.dragon.name : ''],
        type:  [this.dragon.type ? this.dragon.type : ''],
-       histories: [this.dragon.histories ? this.dragon.histories : ''],
-    });
+       histories: [this.dragon.histories ? this.dragon.histories:'']
+     });
   }
 
   fetchDragon(slug): void {
     this.subscription = this.systemService.getDragon(slug).subscribe(
         (data: any) => {
-          this.dragon = data; 
+          this.dragon = data;
           this.createFormBuilder();
          },
         err => console.info(err)
@@ -93,31 +93,49 @@ export class FormComponent implements OnInit {
   reset() {
     this.form.reset();
   }
-  
+
   onSubmit() {
-    if (this.form.valid ) { 
+    if (this.form.valid ) {
       const formData = this.form.value;
       const name = this.form.value.name;
+
+      formData['histories']  = this.normalizeChip(formData.histories);
+
       if ( this.page === 'new') {
         this.systemService.sendDragonInformation('new', formData).subscribe(
-              (resp) => {   
+              (resp) => {
                 this.toastr.success('Adicionado com Sucesso!', `Dragão ${name}`);
                 this.reset();
                 this.systemService.reloadList();
               },
-              (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Get Dragons')
+              (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Dragons')
             );
       } else {
         this.systemService.sendDragonInformation('update', formData).subscribe(
-          (resp) => {  
+          (resp) => {
             this.toastr.success('Atualizado com Sucesso!', `Dragão ${name}`);
             this.systemService.reloadList();
           },
-          (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Get Dragons')
+          (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Dragons')
         );
       }
     } else {
       this.validateAllFormFields(this.form);
     }
+  }
+
+  normalizeChip(array) {
+    const newArray = [];
+    array.map(item => {
+        let result;
+        if (typeof item === 'object') {
+            result = item.value;
+        } else {
+            result = item;
+        }
+        newArray.push(result);
+    });
+
+    return newArray;
   }
 }

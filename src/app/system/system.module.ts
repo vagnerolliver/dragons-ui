@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrderModule } from 'ngx-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { TagInputModule } from 'ngx-chips';
 
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { SystemRoutingModule } from './system-routing.module';
@@ -21,7 +22,8 @@ import { FormComponent } from './form/form.component';
     OrderModule,
     ReactiveFormsModule,
     NgxSmartModalModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    TagInputModule
   ],
   declarations: [ListComponent, DetailsComponent, FormComponent],
   providers: [SystemService, SystemContentService]
