@@ -6,3 +6,43 @@
 .hide {
     display: none !important;
 }
+
+.pull-right {
+    float: right;
+}
+.pull-left {
+    float: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.ico-eyes, .ico-delete, .ico-update {
+  background-image: url('/assets/img/eyes.svg');
+  background-repeat: no-repeat;
+  height: 25px;
+  display: inline-block;
+  margin: 0 3px;
+  width: 25px;
+}
+.ico-delete {
+  background-image: url('/assets/img/delete.svg');
+}
+.ico-update {
+  background-image: url('/assets/img/update.svg');
+}
+
+.ico-more,
+.ico-minus {
+    background-image: url('/assets/img/more.svg');
+    background-repeat: no-repeat;
+    height: 25px;
+    display: inline-block;
+    margin: 0 3px;
+    width: 25px;
+}
+
+.ico-minus {
+    background-image: url('/assets/img/minus.svg');
+}

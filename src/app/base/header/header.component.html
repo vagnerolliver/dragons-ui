@@ -1,2 +1,18 @@
-<div>Olá <span>{{ name }}</span></div>
-<div><a (click)="logout(); $event.preventDefault()" routerLink="/">Sair</a></div>
+<nav>
+  <div class="container">
+    <div class="ui-row">
+      <div class="logo">
+        <h1><a routerLink="/" href="/" title="Dragons">Dragons</a></h1>
+      </div>
+      <div class="nav-item">
+        <span class="welcome">Olá {{ userName }}</span>
+        <span (click)="isToggleLogout()" class="avatar">
+          <img src="../../assets/img/ic-perfil.svg">
+        </span>
+        <div class="logout" [class.is-open]="userLogout">
+            <a (click)="logout();  $event.preventDefault()" routerLink="" href="#"><span>Sair</span></a>
+        </div>
+      </div>
+    </div>  
+  </div>
+</nav>

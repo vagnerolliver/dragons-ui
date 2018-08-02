@@ -8,10 +8,9 @@ import { FormComponent } from './form/form.component';
 const routes: Routes = [
   { path: '', component: ListComponent },
   { path: 'cadastrar', component: FormComponent },
-  { path: 'editar', component: FormComponent },
-  { path: 'details', component: DetailsComponent }, 
-  { path: 'details/:slug', component: DetailsComponent },
-  { path: 'editar/:slug', component: FormComponent }
+  { path: 'editar', component: FormComponent },  
+  { path: 'editar/:slug', component: FormComponent },
+  { path: '**', component: ListComponent,   redirectTo: '' }
 ];
 
 @NgModule({

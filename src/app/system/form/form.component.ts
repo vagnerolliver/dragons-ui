@@ -68,18 +68,41 @@ export class FormComponent implements OnInit {
     );
   }
 
+  isFieldValid(field: string) {
+    return !this.form.get(field).valid && this.form.get(field).touched;
+  }
+
+  displayFieldCss(field: string) {
+      return {
+          'has-error': this.isFieldValid(field),
+          'has-feedback': this.isFieldValid(field)
+      };
+  }
+
+  validateAllFormFields(formGroup: FormGroup) {
+      Object.keys(formGroup.controls).forEach(field => {
+          const control = formGroup.get(field);
+          if (control instanceof FormControl) {
+              control.markAsTouched({ onlySelf: true });
+          } else if (control instanceof FormGroup) {
+              this.validateAllFormFields(control);
+          }
+      });
+  }
+
   reset() {
     this.form.reset();
   }
-
+  
   onSubmit() {
     if (this.form.valid ) { 
       const formData = this.form.value;
-
+      const name = this.form.value.name;
       if ( this.page === 'new') {
         this.systemService.sendDragonInformation('new', formData).subscribe(
-              (resp) => {  
-                this.toastr.success('Add Success!', 'Dragons');
+              (resp) => {   
+                this.toastr.success('Adicionado com Sucesso!', `Dragão ${name}`);
+                this.reset();
                 this.systemService.reloadList();
               },
               (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Get Dragons')
@@ -87,12 +110,14 @@ export class FormComponent implements OnInit {
       } else {
         this.systemService.sendDragonInformation('update', formData).subscribe(
           (resp) => {  
-            this.toastr.success('Update Success!', 'Dragons');
+            this.toastr.success('Atualizado com Sucesso!', `Dragão ${name}`);
             this.systemService.reloadList();
           },
           (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Get Dragons')
         );
       }
+    } else {
+      this.validateAllFormFields(this.form);
     }
   }
 }

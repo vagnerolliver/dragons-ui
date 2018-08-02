@@ -8,9 +8,11 @@ import { Cnt } from '../services/cnt';
 })
 export class SystemService {
   @Output() shouldReloadList: EventEmitter<boolean> = new EventEmitter();
+ 
+  public paginacao: any;
 
   public slug;
-
+  
   constructor(
     private http: HttpClient,
     private title: Title,
@@ -28,7 +30,7 @@ export class SystemService {
       httpParams = httpParams.append(k, params[k]);
     });
 
-    if (!params.page) {
+    if (params.page < 0) {
       httpParams = httpParams.append('page', '1'); 
     }
 

@@ -1,30 +1,43 @@
-<p>
-  Lista de Dragões
-</p>
-<table>
-  <thead>
-      <tr> 
-        <th>Data de criação</th>
-        <th>Nome</th>
-        <th>Tipo</th>
-        <th>Ação</th>
-        <td><a routerLink="/system/cadastrar">Novo</a></td>
-      </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let dragon of dragons | orderBy: 'name'; let i = index">
-        <td>{{dragon?.created_at | date: 'dd/MM/yyyy'}}</td>
-        <td>{{dragon?.name}}</td>
-        <td>{{dragon?.type}}</td>
-        <td>
-          <a [routerLink]="'/system/details/'+dragon?.slug">Details</a> | 
-          <a [routerLink]="'/system/editar/'+dragon?.slug" href="#">Alterar</a> |
-          <a (click)="deleteDragon(dragon?.slug); $event.preventDefault();" href="#">Excluir</a>
-        </td>
-        <td></td>
-    </tr>
-  </tbody>
-  <tfoot style="text-align: center;">
-      <a *ngFor="let page of pages; let page = index" style="display: inline-block; font-size: 20px;" (click)="addPage(page); $event.preventDefault();" href=""> {{ page + 1 }} | </a>
-  </tfoot>
-</table>
+<div class="container">
+  <div class="box">
+    <a routerLink="/system/cadastrar" class="btn btn-primary btn-link pull-right">
+      <span>Novo Cadastro</span>
+    </a>
+    <table class="table-list table-striped table-fixed">
+      <thead>
+          <tr>
+            <th>Nome</th> 
+            <th>Tipo</th>
+            <th>Histories</th>
+            <th>Data de criação</th>
+            <th></th>
+            <!-- <td><a routerLink="/system/cadastrar">Novo</a></td> -->
+          </tr>
+      </thead>
+     
+      <tbody>
+        <tr *ngFor="let dragon of dragons | 
+             orderBy: 'name':false: 'case-insensitive' | 
+             paginate: { itemsPerPage: 10, currentPage: page };">
+            <td class="name">{{dragon?.name}}</td>
+            <td class="type">{{dragon?.type}}</td>
+            <td class="date">{{dragon?.histories}}</td>
+            <td class="date">{{dragon?.created_at | date: 'dd/MM/yyyy'}}</td>
+            <td class="actions">
+              <!-- <a [routerLink]="'/system/details/'+dragon?.slug"><i class="ico-eyes"></i></a>   -->
+              <a (click)="fetchDragon(dragon?.slug); $event.preventDefault();" href="#"><i class="ico-eyes"></i></a>
+              
+              <a [routerLink]="'/system/editar/'+dragon?.slug" href="#"><i class="ico-update"></i></a>  
+              <a (click)="deleteDragon(dragon?.slug); $event.preventDefault();" href="#"><i class="ico-delete"></i></a>
+            </td> 
+        </tr>
+      </tbody> 
+    </table>
+    <pagination-controls (pageChange)="page = $event"
+                          previousLabel="Anterior"
+                          nextLabel="Próxima">
+    </pagination-controls>
+  </div>
+</div>
+
+<app-details></app-details>

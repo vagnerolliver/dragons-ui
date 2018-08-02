@@ -1,0 +1,39 @@
+// Core variables and mixins
+@import "./src/sass/base/variables";
+@import "./src/sass/base/mixins";
+
+:host ::ng-deep {
+  .table-list {
+    .actions {
+      text-align: right;
+
+      a {
+        position: relative;
+        opacity: 0;
+        transition: all .35s ease-in-out;
+        top: 5px;
+        visibility: hidden;
+      }
+    }
+
+    tr:hover {
+      .actions a {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  pagination-controls {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+
+    .ngx-pagination  {
+      .current {
+          background-color: #f44336;
+          border-radius: 3px;
+      }
+    }
+  }
+}

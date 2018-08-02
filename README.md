@@ -2,6 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
 
+Used dependencies
+
+https://www.npmjs.com/package/ngx-order-pipe 
+https://www.npmjs.com/package/ngx-toastr - alert callback error ou sucess
+http://michaelbromley.github.io/ngx-pagination/#/ - paginação da lista de dragões
+https://www.npmjs.com/package/ngx-smart-modal ´- foi útil para exibir os dados do dragão.
+
+Bug no serviço para retornos todos mos pokemons, alguns dos objetos que o serviço retorna não veio com slug e nome, isso acabou dificultando na hora de limpara a base.
+
+Fiz um bff local para limpar esses objetos e montei eu mesmo ma paginação de dados que eu monto no front.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

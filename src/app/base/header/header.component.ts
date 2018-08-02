@@ -10,8 +10,9 @@ import { SystemContentService } from '../../services/system-content.service';
 export class HeaderComponent implements OnInit, DoCheck {
 
   document = this.systemContentService.document;
-
-  name;
+  
+  userLogout = false;
+  userName: string;
 
   constructor(
     private systemContentService: SystemContentService,
@@ -21,10 +22,14 @@ export class HeaderComponent implements OnInit, DoCheck {
   ngOnInit() {}
 
   ngDoCheck() {
-    this.name = this.authService.loggedUserName();
+    this.userName = this.authService.loggedUserName();
   }
 
   logout() {
     this.authService.logout();
+  }
+
+  isToggleLogout() { 
+    this.userLogout = !this.userLogout;
   }
 }

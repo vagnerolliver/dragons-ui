@@ -11,34 +11,3 @@
     width: 100%;
   }
 }
-
-.btn  {
-  border: 1px solid transparent;
-  border-radius: 3px;
-  display: inline-block;
-  font-size: 1rem;
-  font-weight: 300;
-  height: 38px;
-  text-align: center;
-  vertical-align: middle;
-  transition: all .15s ease-in-out;
-  white-space: nowrap;
-
-  &.btn-primary {
-    background-color: #008d6a;
-    border-color: #4caf50;
-    box-shadow: none;
-    color: #fff;
-
-    &:hover {
-      background-color: #66bb6a;
-      border-color: #66bb6a;
-    }
-  }
-
-  &.btn-block {
-    display: block;
-    width: 100%;
-    white-space: normal;
-  }
-}

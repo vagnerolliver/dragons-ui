@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -23,7 +25,9 @@ import { BaseModule } from './base/base.module';
     BaseModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({}),],
+    ToastrModule.forRoot({}),
+    NgxSmartModalModule.forRoot()
+  ],
   providers: [
     AuthGuard,
     Cnt,
@@ -31,6 +35,6 @@ import { BaseModule } from './base/base.module';
     ErrorHandlerService,
     SystemContentService
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

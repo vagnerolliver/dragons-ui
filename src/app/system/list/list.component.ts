@@ -5,6 +5,7 @@ import { ErrorHandlerService } from '../../services/errorHandler.service';
 import { SystemService } from '../system.service';
 import { Dragon } from '../model/dragon';
 import { ToastrService } from 'ngx-toastr';
+import { SystemContentService } from '../../services/system-content.service';
 
 @Component({
   selector: 'app-list',
@@ -15,16 +16,18 @@ export class ListComponent implements OnInit, OnDestroy, DoCheck  {
 
   subscription: Subscription;
 
-  shouldReload: boolean;
-
-  dragons: Dragon;
+  shouldReload: boolean; 
+  
   filterPage: number = 0; 
-  pages: Object;
+  dragons = []; 
+  totalNewDragons = [];
+  page: 1;
 
   constructor(
     private systemService: SystemService,
     private toastr: ToastrService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private systemContentService: SystemContentService
   ) { }
 
   ngOnInit() {
@@ -34,7 +37,7 @@ export class ListComponent implements OnInit, OnDestroy, DoCheck  {
       shouldReload => this.shouldReload = shouldReload
     );
 
-    this.fetchDragons();
+    this.fetchTotalDragons();
   }
 
   ngOnDestroy() {
@@ -44,15 +47,29 @@ export class ListComponent implements OnInit, OnDestroy, DoCheck  {
   ngDoCheck() {
     if (this.shouldReload) {
       this.shouldReload = false;
-      this.fetchDragons();
+      this.fetchTotalDragons();
     }
   }
 
-  fetchDragons(): void {
+  moutNewObject(i): void {
+    this.filterPage = i;
+    this.systemService.getDragons(this.buildParams()).subscribe(
+      (data: any) => {
+        data.items.forEach((dragon, i) => {
+          if( dragon.name.trim().length > 0 ) {
+            this.totalNewDragons.push(i)
+            this.dragons.push(dragon);
+          }
+        }) 
+      }
+    );
+  }
+
+  fetchTotalDragons(): void {
     this.subscription = this.systemService.getDragons(this.buildParams()).subscribe(
-        (data: any) => {
-          this.dragons = data.items; 
-          this.pages = this.pagination(data._metadata.total_count / data._metadata.per_page );
+        (data: any) => { 
+          this.dragons = [];
+          this.pagination(data._metadata.total_count / data._metadata.per_page );
         },
         (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Get Dragons')
     );
@@ -64,7 +81,6 @@ export class ListComponent implements OnInit, OnDestroy, DoCheck  {
           this.toastr.success('Delete Success!', 'Dragons');
           this.filterPage = 0;
           this.systemService.reloadList();
-          
          },
          (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Delete Dragons')
       );
@@ -79,25 +95,32 @@ export class ListComponent implements OnInit, OnDestroy, DoCheck  {
 
   addPage(item) { 
     this.filterPage = item;
-    this.fetchDragons();
+    this.fetchTotalDragons();
   }
 
-  nextPage() {
-    this.filterPage++;
-    this.fetchDragons();
-  }
-
-  prevPage() {
-    this.filterPage--;
-    this.fetchDragons();
-  }
-  
   pagination(number) {
     const _number = Math.ceil(number);
     const array = [];
     for ( let i = 0; i < _number; i++) {
         array.push(i);
+        this.moutNewObject(i); 
     }
     return array;
+  }
+
+  openModal(obj, id) {
+    this.systemContentService.openSmartModal(obj, id);
+  }
+
+  fetchDragon(slug): void {
+    console.info(slug);
+    this.subscription = this.systemService.getDragon(slug).subscribe(
+        (data: any) => {
+          console.info(data);
+          this.openModal(data, 'detailsModal');
+          this.systemService.addTitle(`Dragons - ${data.name}`);
+         },
+         (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Get Dragons')
+      );
   }
 }

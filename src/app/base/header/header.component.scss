@@ -1,8 +1,94 @@
+// Core variables and mixins
+@import "./src/sass/base/variables";
+@import "./src/sass/base/mixins";
+
 :host ::ng-deep {
-  header  {
-    color: #fff;
-    position: fixed;
-    top: 0;
+  nav {
+    background-color: #000;
+
+    .ui-row {
+      justify-content: space-between;
+    }
+  }
+
+  .logo {
+    h1 {
+      color: #fff;
+      margin-left: 15px;
+      margin-top: 5px;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .nav-item {
+    @include flexbox;
+    align-items: center;
+  }
+
+  .welcome {
+    color: #fff; 
+    margin-right: 10px;
+  }
+
+  .avatar { 
+    float: left;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+    width: 50px;
     z-index: 1;
+
+    &:hover {
+      background-color: rgba(238, 238, 238, 0.6);
+    }
+  }
+
+  .logout {
+    transition: all .35s ease-in-out;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
+    background-color: #fff;
+    border: 1px solid #e0e0e0; 
+    padding: 2px 0;
+    min-width: 160px;
+    position: absolute;
+    opacity: 0;
+    top: 30px;
+
+    &.is-open {
+      opacity: 1;
+      top: 60px;
+      z-index: 2;
+    }
+
+    a {
+      @include flexbox; 
+      align-items: center;
+      padding: 5px;
+      border-radius: 3px;
+      margin: 2px 3px;
+      text-decoration: none;
+
+      span {
+        color: #757575; 
+      }
+
+      &::before {
+        content: '';
+        background-image: url('/assets/img/power.svg');
+        background-repeat: no-repeat;
+        display: inline-block;
+        height: 17px;
+        margin: 2px 5px 0 0;
+        width: 17px;
+      }
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
   }
 }

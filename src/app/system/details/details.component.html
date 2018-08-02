@@ -1,19 +1,25 @@
-<p>
-  Detalhes do Dragão - Logado 
-</p>
-<table>
-  <thead>
-      <tr> 
-        <th>Data de criação</th>
-        <th>Nome</th>
-        <th>Tipo</th>
-      </tr>
-  </thead>
-  <tbody>
-    <tr>
-        <td>{{dragon?.created_at | date: 'dd/MM/yyyy'}}</td>
-        <td>{{dragon?.name}}</td>
-        <td>{{dragon?.type}}</td>
-     </tr>
-  </tbody>
-</table>
+<ngx-smart-modal #detailsModal identifier="detailsModal">
+  <div class="wrap">
+    <table class="table-list table-striped table-fixed">
+      <tbody>
+          <tr>
+            <td><b>Nome:</b></td>
+            <td class="name">{{detailsModal.getData()?.name}}</td>
+          </tr>
+          <tr>
+              <td><b>Tipo:</b></td>
+              <td class="type">{{detailsModal.getData()?.type}}</td>
+          </tr>
+          <tr>
+              <td><b>Histories:</b></td>
+              <td class="date">{{detailsModal.getData()?.histories }}</td>
+          </tr>
+          <tr>
+              <td><b>Data Criação:</b></td>
+              <td class="date">{{detailsModal.getData()?.created_at | date: 'dd/MM/yyyy'}}</td>
+          </tr>
+        </tbody>
+    </table> 
+  </div>
+</ngx-smart-modal>
+  

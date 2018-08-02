@@ -1,14 +1,19 @@
 :host {
   display: block;
-  bottom: 0;
   // color: #fff;
   display: block;
-  position: fixed;
+  margin-top: 20px;
   width: 100%;
   z-index: 1;
 }
 
 :host-context(.page-login) {
+
+  :host { 
+    position: fixed;
+    bottom: 0;
+  }
+
   .copyright {
     color: #fff;
   }

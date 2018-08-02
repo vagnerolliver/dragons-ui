@@ -1,0 +1,21 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 2px;
+  width: 100%;
+
+  td, th {
+    border-top: 1px solid #dee2e6;
+    display: table-cell;
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  &.table-fixed {
+    table-layout: fixed;
+  }
+
+  &.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+  }
+}

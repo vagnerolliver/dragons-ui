@@ -1,3 +1,48 @@
-:host ::ng-deep .has-error { 
-  border: 1px solid red;
+// Core variables and mixins
+@import "./src/sass/base/variables";
+@import "./src/sass/base/mixins";
+
+:host ::ng-deep { 
+  .has-error {
+    border: 1px solid red;
+  }
+  
+  .box {
+    max-width: 500px; 
+  }
+
+  form {
+    max-width: 600px;
+    margin: auto;
+    overflow: hidden;
+    margin: 30px auto 0;
+
+    .histories {
+      padding-right: 30px;
+      
+      div {
+        position: relative;
+         
+        & + div {
+          margin-top: 15px;
+        }
+
+        i {
+          @include absolute-center-v();
+          position: absolute;
+          right: -35px;
+        }
+      }
+    }
+
+   
+  }
+
+  .back {
+    color: #fff; 
+  }
+
+  hr {
+    clear: both;
+  }
 }

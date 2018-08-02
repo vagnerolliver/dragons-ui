@@ -14,3 +14,27 @@ html {
   -webkit-font-smoothing: antialiased;
   touch-action: manipulation;
 }
+
+a {
+  text-decoration: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+body:not(.page-login) {
+  background-color: #f4f7f8;
+}
+
+.box {
+  background-color: #fff;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
+  border: 1px solid #e0e0e0; 
+  padding: 20px;
+  margin-top: 20px;
+
+  .btn {
+    margin-bottom: 20px;
+  }
+}
