@@ -18,7 +18,7 @@
       <tbody>
         <tr *ngFor="let dragon of dragons |
              orderBy: 'name':false: 'case-insensitive' |
-             paginate: { itemsPerPage: 2, currentPage: page };">
+             paginate: { itemsPerPage: 10, currentPage: page };">
             <td class="name">{{dragon?.name}}</td>
             <td class="type">{{dragon?.type}}</td>
             <td class="date">{{dragon?.histories}}</td>
