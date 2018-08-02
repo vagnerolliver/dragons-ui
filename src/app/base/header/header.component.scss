@@ -4,7 +4,9 @@
 
 :host ::ng-deep {
   nav {
-    background-color: #000;
+    background-color: rgba(#000,.4);
+    position: relative;
+    z-index: 2;
 
     .ui-row {
       justify-content: space-between;
@@ -14,12 +16,15 @@
   .logo {
     h1 {
       color: #fff;
-      margin-left: 15px;
       margin-top: 5px;
 
       a {
         color: inherit;
         text-decoration: none;
+
+        img {
+          max-width: 150px;
+        }
       }
     }
   }
@@ -27,14 +32,15 @@
   .nav-item {
     @include flexbox;
     align-items: center;
+    position: relative;
   }
 
   .welcome {
-    color: #fff; 
+    color: #fff;
     margin-right: 10px;
   }
 
-  .avatar { 
+  .avatar {
     float: left;
     cursor: pointer;
     padding: 10px;
@@ -51,10 +57,11 @@
     transition: all .35s ease-in-out;
     box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
     background-color: #fff;
-    border: 1px solid #e0e0e0; 
+    border: 1px solid #e0e0e0;
     padding: 2px 0;
     min-width: 160px;
     position: absolute;
+    right: 0px;
     opacity: 0;
     top: 30px;
 
@@ -65,7 +72,7 @@
     }
 
     a {
-      @include flexbox; 
+      @include flexbox;
       align-items: center;
       padding: 5px;
       border-radius: 3px;
@@ -73,7 +80,7 @@
       text-decoration: none;
 
       span {
-        color: #757575; 
+        color: #757575;
       }
 
       &::before {

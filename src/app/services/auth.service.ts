@@ -15,8 +15,8 @@ export class AuthService {
     },
     { nome: 'Fulano',
       id: '1',
-      email: 'fulano.olliver@gmail.com',
-      password: '@vanger2018'
+      email: 'admin',
+      password: 'admin'
     }
   ];
 
@@ -32,13 +32,13 @@ export class AuthService {
     });
 
     if (user.length < 1) {
-      this.toastr.error('Este e-mail não esta cadastrado.', 'Dragons Login');
+      this.toastr.error('Dados inválidos.', 'Dragons');
       return false;
     } else if (user.length === 1) {
       if (user[0].password == password) {
          this.user = user[0];
       } else {
-        this.toastr.error('Senha inválida', 'Dragons Login');
+        this.toastr.error('Dados inválidos.', 'Dragons');
         return false;
       }
     }

@@ -1,4 +1,5 @@
 table {
+  border: 1px solid #dee2e6;
   border-collapse: collapse;
   border-spacing: 2px;
   width: 100%;
@@ -15,7 +16,11 @@ table {
     table-layout: fixed;
   }
 
-  &.table-striped tbody tr:nth-of-type(odd) {
+  &.table-striped tbody tr:hover {
     background-color: rgba(0,0,0,.05);
+  }
+
+  &.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f8f8;
   }
 }

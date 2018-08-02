@@ -6,7 +6,7 @@
     <table class="table-list table-striped table-fixed">
       <thead>
           <tr>
-            <th>Nome</th> 
+            <th>Nome</th>
             <th>Tipo</th>
             <th>Histories</th>
             <th>Data de criação</th>
@@ -14,11 +14,11 @@
             <!-- <td><a routerLink="/system/cadastrar">Novo</a></td> -->
           </tr>
       </thead>
-     
+
       <tbody>
-        <tr *ngFor="let dragon of dragons | 
-             orderBy: 'name':false: 'case-insensitive' | 
-             paginate: { itemsPerPage: 10, currentPage: page };">
+        <tr *ngFor="let dragon of dragons |
+             orderBy: 'name':false: 'case-insensitive' |
+             paginate: { itemsPerPage: 2, currentPage: page };">
             <td class="name">{{dragon?.name}}</td>
             <td class="type">{{dragon?.type}}</td>
             <td class="date">{{dragon?.histories}}</td>
@@ -26,12 +26,12 @@
             <td class="actions">
               <!-- <a [routerLink]="'/system/details/'+dragon?.slug"><i class="ico-eyes"></i></a>   -->
               <a (click)="fetchDragon(dragon?.slug); $event.preventDefault();" href="#"><i class="ico-eyes"></i></a>
-              
-              <a [routerLink]="'/system/editar/'+dragon?.slug" href="#"><i class="ico-update"></i></a>  
+
+              <a [routerLink]="'/system/editar/'+dragon?.slug" href="#"><i class="ico-update"></i></a>
               <a (click)="deleteDragon(dragon?.slug); $event.preventDefault();" href="#"><i class="ico-delete"></i></a>
-            </td> 
+            </td>
         </tr>
-      </tbody> 
+      </tbody>
     </table>
     <pagination-controls (pageChange)="page = $event"
                           previousLabel="Anterior"

@@ -1,8 +1,8 @@
 <nav>
   <div class="container">
-    <div class="ui-row">
+    <div class="ui-row no-gutters">
       <div class="logo">
-        <h1><a routerLink="/" href="/" title="Dragons">Dragons</a></h1>
+        <h1><a routerLink="" title="Dragons"><img src="../../assets/img/logo.png"></a></h1>
       </div>
       <div class="nav-item">
         <span class="welcome">Olá {{ userName }}</span>
@@ -13,6 +13,6 @@
             <a (click)="logout();  $event.preventDefault()" routerLink="" href="#"><span>Sair</span></a>
         </div>
       </div>
-    </div>  
+    </div>
   </div>
 </nav>

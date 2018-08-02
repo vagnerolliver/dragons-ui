@@ -24,14 +24,14 @@
   }
 
   &.btn-primary {
-    background-color: #f44336;
-    border-color: lighten(#f44336,5%);
+    background-color: #8B008B;
+    border-color: lighten(#8B008B,5%);
     box-shadow: none;
     color: #fff;
 
     &:hover {
-      background-color: lighten(#f44336,5%);
-      border-color: lighten(#f44336,5%);
+      background-color: lighten(#8B008B,5%);
+      border-color: lighten(#8B008B,5%);
     }
   }
 
@@ -46,7 +46,7 @@
 
     span {
       display: table-cell;
-      vertical-align: middle; 
+      vertical-align: middle;
     }
   }
 }

@@ -2,22 +2,29 @@
 @import "./src/sass/base/variables";
 @import "./src/sass/base/mixins";
 
-:host ::ng-deep {
+:host-context(.page-login) {
+  .dragons-bg {
+    background-image: url('/assets/img/bg-dragons.jpg') !important;
+    height: 100vh;
 
+  }
+}
+
+:host ::ng-deep {
   .site-main {
     position: relative;
     z-index: 1;
   }
 
   .dragons-bg {
-    background-image: url('/assets/img/bg-dragons.jpg');
+    background-image: url('/assets/img/bg-dragons-int.jpg');
     background-size: cover;
     justify-content: center;
     -webkit-justify-content: center;
     max-height: 768px;
     position: fixed;
-    min-height: 100vh;
-    min-width: 100vw;
+    height: 100vh;
+    width: 100vw;
     top: 0;
 
     &::after  {
