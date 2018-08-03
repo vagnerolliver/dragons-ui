@@ -1,7 +1,8 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   password: string;
 
   constructor(
+    @Inject(DOCUMENT) public document: any,
     private router: Router,
     private authService: AuthService
   ) { }
@@ -21,6 +23,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (this.authService.isLogged()) {
       this.router.navigate(['/system']);
+    } else {
+      this.document.body.classList.add('page-login');
     }
   }
 

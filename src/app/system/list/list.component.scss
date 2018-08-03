@@ -4,6 +4,13 @@
 
 :host ::ng-deep {
   .table-list {
+    thead {
+      th {
+        text-transform: uppercase;
+        font-style: italic;
+      }
+    }
+
     .l-mobile {
       display: none;
       font-weight: bold;
