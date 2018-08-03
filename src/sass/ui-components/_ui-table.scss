@@ -4,6 +4,16 @@ table {
   border-spacing: 2px;
   width: 100%;
 
+  thead {
+    background-color: #f44336;
+
+    th {
+      border: 1px solid #f44336;
+      color: #fff;
+    }
+  }
+
+
   td, th {
     border-top: 1px solid #dee2e6;
     display: table-cell;
@@ -17,10 +27,10 @@ table {
   }
 
   &.table-striped tbody tr:hover {
-    background-color: rgba(0,0,0,.05);
+    background-color: rgba(0,0,0,.05) !important;
   }
 
   &.table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f8f8f8;
+    background-color: #f9f9f9;
   }
 }

@@ -8,7 +8,7 @@ import { FormComponent } from './form/form.component';
 const routes: Routes = [
   { path: '', component: ListComponent },
   { path: 'cadastrar', component: FormComponent },
-  { path: 'editar', component: FormComponent },  
+  { path: 'editar', component: FormComponent },
   { path: 'editar/:slug', component: FormComponent },
   { path: '**', component: ListComponent,   redirectTo: '' }
 ];
@@ -17,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SystemRoutingModule { }
+export class SystemRoutingModule {}

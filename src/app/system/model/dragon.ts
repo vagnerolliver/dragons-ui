@@ -1,24 +1,11 @@
-export class Dragon {
-  items: Items;
-  _metadata: Metadata;
-}
-
-interface Items {
+export interface Dragon {
   id: number;
   name: string;
   type: string;
   created_at: string;
   slug: string;
-  histories: [string]; 
+  histories: [string];
 }
 
-interface Metadata {
-  id: number;
-  name: string;
-  type: string;
-  created_at: string;
-  slug: string;
-  histories: [string]; 
-} 
 
- 
+

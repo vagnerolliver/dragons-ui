@@ -1,5 +1,6 @@
 <div class="container">
   <div class="box">
+    <h1 class="title left">Lista de Dragões</h1>
     <a routerLink="/system/cadastrar" class="btn btn-primary btn-link pull-right">
       <span>Novo Cadastro</span>
     </a>
@@ -7,35 +8,53 @@
       <thead>
           <tr>
             <th>Nome</th>
-            <th>Tipo</th>
+            <th class="type">Tipo</th>
             <th>Histories</th>
-            <th>Data de criação</th>
-            <th></th>
-            <!-- <td><a routerLink="/system/cadastrar">Novo</a></td> -->
+            <th class="date">Data de criação</th>
+            <th class="actions"></th>
           </tr>
       </thead>
-
       <tbody>
         <tr *ngFor="let dragon of dragons |
-             orderBy: 'name':false: 'case-insensitive' |
-             paginate: { itemsPerPage: 10, currentPage: page };">
-            <td class="name">{{dragon?.name}}</td>
-            <td class="type">{{dragon?.type}}</td>
-            <td class="date">{{dragon?.histories}}</td>
-            <td class="date">{{dragon?.created_at | date: 'dd/MM/yyyy'}}</td>
-            <td class="actions">
-              <!-- <a [routerLink]="'/system/details/'+dragon?.slug"><i class="ico-eyes"></i></a>   -->
-              <a (click)="fetchDragon(dragon?.slug); $event.preventDefault();" href="#"><i class="ico-eyes"></i></a>
+            orderBy: 'name':false: 'case-insensitive' |
+            paginate: { itemsPerPage: 10, currentPage: page };"
+        >
+            <td class="name">
+                <span class="l-mobile">Nome: </span> {{dragon?.name}}
+            </td>
+            <td class="type">
+              <span class="l-mobile">Tipo: </span> {{dragon?.type}}
+            </td>
+            <td class="histories">
+              <span class="l-mobile">Histories: </span>
+              <tag-input
+                [ngModel]="dragon?.histories"
+                [disable]="true"
+              >
+            </tag-input>
 
-              <a [routerLink]="'/system/editar/'+dragon?.slug" href="#"><i class="ico-update"></i></a>
-              <a (click)="deleteDragon(dragon?.slug); $event.preventDefault();" href="#"><i class="ico-delete"></i></a>
+            </td>
+            <td class="date">
+              <span class="l-mobile">Data de Criação: </span> {{dragon?.created_at | date: 'dd/MM/yyyy'}}
+            </td>
+            <td class="actions">
+              <a  (click)="openModal(dragon?.slug,'detailsModal');
+                  $event.preventDefault();"
+                  href="#"
+              >
+                <i class="ico-eyes"></i>
+              </a>
+              <a [routerLink]="'/system/editar/'+dragon?.slug" href="#">
+                <i class="ico-update"></i>
+              </a>
+              <a (click)="deleteDragon(dragon?.slug); $event.preventDefault();" href="#">
+                <i class="ico-delete"></i>
+              </a>
             </td>
         </tr>
       </tbody>
     </table>
-    <pagination-controls (pageChange)="page = $event"
-                          previousLabel="Anterior"
-                          nextLabel="Próxima">
+    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Próxima">
     </pagination-controls>
   </div>
 </div>

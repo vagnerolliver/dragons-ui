@@ -1,26 +1,24 @@
 :host {
   display: block;
-  // color: #fff;
-  display: block;
   margin-top: 20px;
+  position: relative;
   width: 100%;
   z-index: 1;
 }
 
-:host-context(.page-login) {
-  :host {
-    position: fixed;
-    bottom: 0;
-  }
-
+:host ::ng-deep {
   .copyright {
     color: #fff;
+    padding: 40px;
+    text-align: center;
   }
 }
 
-:host ::ng-deep {
-    .copyright {
-      text-align: center;
-      padding: 40px;
-    }
+:host-context(.page-form),
+:host-context(.page-login) {
+  .copyright {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
 }

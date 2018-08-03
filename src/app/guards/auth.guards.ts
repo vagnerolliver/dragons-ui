@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import {  ActivatedRouteSnapshot,
           CanActivate,
           CanLoad,
@@ -9,20 +10,16 @@ import { Observable } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { SystemContentService } from '../services/system-content.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  document = this.systemContentService.document;
-
   constructor(
-    private systemContentService: SystemContentService,
+    @Inject(DOCUMENT) public document: any,
     private authService: AuthService,
     private router: Router,
     private toastr: ToastrService
-  ) {
-  }
+  ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     return this.canAccess();

@@ -1,6 +1,5 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { SystemContentService } from '../../services/system-content.service';
 
 @Component({
   selector: 'app-header',
@@ -9,27 +8,24 @@ import { SystemContentService } from '../../services/system-content.service';
 })
 export class HeaderComponent implements OnInit, DoCheck {
 
-  document = this.systemContentService.document;
-  
+  userIsLogged: any;
   userLogout = false;
   userName: string;
 
-  constructor(
-    private systemContentService: SystemContentService,
-    private authService: AuthService
-  ) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 
   ngDoCheck() {
     this.userName = this.authService.loggedUserName();
+    this.userIsLogged = this.authService.isLogged;
   }
 
   logout() {
     this.authService.logout();
   }
 
-  isToggleLogout() { 
+  isToggleLogout() {
     this.userLogout = !this.userLogout;
   }
 }

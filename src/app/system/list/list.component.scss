@@ -4,8 +4,23 @@
 
 :host ::ng-deep {
   .table-list {
+    .l-mobile {
+      display: none;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .type {
+      width: 200px;
+    }
+
+    .date {
+      width: 150px;
+    }
+
     .actions {
       text-align: right;
+      width: 150px;
 
       a {
         position: relative;
@@ -21,6 +36,66 @@
         opacity: 1;
         visibility: visible;
       }
+    }
+
+
+    @media (max-width:768px) {
+      .l-mobile {
+        display: inline-block;
+      }
+
+      .type,
+      .date,
+      .actions {
+        width: auto;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        display: block;
+        position: relative;
+
+        td {
+          display: block;
+          border: none;
+
+          &:not(:last-child) {
+            padding-bottom: 0;
+          }
+
+          &:nth-last-child(2) {
+            padding-bottom: 12px;
+            border-bottom: 1px solid #dee2e6;
+          }
+        }
+      }
+
+      .actions {
+        @include absolute-center-v();
+        right: 0;
+
+        a {
+          display: block;
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  .ng2-tag-input {
+    border: none !important;
+    cursor: default !important;
+
+    * {
+      cursor: default !important;
+    }
+
+    .ng2-tag-input__text-input[disabled=true] {
+      display: none !important;
     }
   }
 

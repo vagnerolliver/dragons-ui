@@ -14,5 +14,23 @@
 
 @import "~ngx-smart-modal/ngx-smart-modal";
 
+.nsm-dialog  {
+  max-width: 670px !important;
+}
+
+body.dialog-open {
+  overflow: hidden;
+
+  .nsm-dialog.nsm-dialog-open {
+      top: 8%;
+      bottom: auto;
+      @media (max-width:768px){
+          top: 50%;
+          transform: translateY(-50%);
+      }
+
+  }
+}
+
 
 

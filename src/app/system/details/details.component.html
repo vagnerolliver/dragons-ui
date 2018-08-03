@@ -1,25 +1,30 @@
-<ngx-smart-modal #detailsModal identifier="detailsModal">
+<ngx-smart-modal (onOpen)="open()" (onClose)="close()" (onDismiss)="close()" #detailsModal identifier="detailsModal">
   <div class="wrap">
     <table class="table-list table-striped table-fixed">
+      <thead>
+        <tr>
+          <th colspan="2">Detalhes do Dragão - {{ detailsModal.getData()?.slug }}</th>
+        </tr>
+      </thead>
       <tbody>
           <tr>
             <td><b>Nome:</b></td>
-            <td class="name">{{detailsModal.getData()?.name}}</td>
+            <td class="name">{{dragon?.name}}</td>
           </tr>
           <tr>
               <td><b>Tipo:</b></td>
-              <td class="type">{{detailsModal.getData()?.type}}</td>
+              <td class="type">{{dragon?.type}}</td>
           </tr>
           <tr>
               <td><b>Histories:</b></td>
-              <td class="date">{{detailsModal.getData()?.histories }}</td>
+              <td class="date">{{dragon?.histories}}</td>
           </tr>
           <tr>
               <td><b>Data Criação:</b></td>
-              <td class="date">{{detailsModal.getData()?.created_at | date: 'dd/MM/yyyy'}}</td>
+              <td class="date">{{dragon?.created_at | date: 'dd/MM/yyyy'}}</td>
           </tr>
         </tbody>
-    </table> 
+    </table>
   </div>
 </ngx-smart-modal>
-  
+

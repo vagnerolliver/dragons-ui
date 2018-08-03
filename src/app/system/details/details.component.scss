@@ -1,5 +1,15 @@
-:host ::ng-deep { 
+:host ::ng-deep {
   .wrap {
     padding: 15px;
+  }
+}
+
+:host-context(.open-modal) {
+  ngx-smart-modal[identifier="detailsModal"] {
+      position: fixed;
+      overflow-x: hidden;
+      overflow-y: auto;
+      top: 0;
+      z-index: 9999;
   }
 }

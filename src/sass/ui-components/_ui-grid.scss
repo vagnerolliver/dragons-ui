@@ -1,7 +1,8 @@
 .container {
     max-width: 1140px;
+    margin: auto;
+    padding: 0 15px;
     width: 100%;
-    margin: auto; 
 }
 
 .col {
@@ -80,7 +81,7 @@
     flex: 0 0 91.666667%;
     max-width: 91.666667%;
 }
-.col-12 { 
+.col-12 {
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
     max-width: 100%;

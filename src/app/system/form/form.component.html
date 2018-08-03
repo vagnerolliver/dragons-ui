@@ -1,7 +1,9 @@
 <div class="container">
     <div class="box">
-      <h2 class="text-center">CADASTRAR DRAGÃO</h2>
-      <form [formGroup]="form">
+      <h1 *ngIf="new" class="title">CADASTRAR DRAGÃO</h1>
+      <h1 *ngIf="!new" class="title">ATUALIZAR DRAGÃO</h1>
+
+      <form class="form" [formGroup]="form">
         <div class="form-group" [ngClass]="displayFieldCss('name')">
           <input class="form-control" type="text" formControlName="name" placeholder="Nome" required>
         </div>
@@ -21,17 +23,13 @@
             </tag-input>
         </div>
 
-
         <div class="form-group">
-            <a routerLink="/system" href="/system" class="btn btn-black btn-link pull-left back" title="Voltar"><span>Voltar</span></a>
-
-            <button *ngIf="page == 'new'" class="btn btn-primary pull-right" (click)="onSubmit()">Cadastrar</button>
-            <button *ngIf="page != 'new'" class="btn btn-primary pull-right" (click)="onSubmit()">Atualizar</button>
+            <button *ngIf="new" class="btn btn-primary pull-right" (click)="onSubmit()">Cadastrar</button>
+            <button *ngIf="!new" class="btn btn-primary pull-right" (click)="onSubmit()">Atualizar</button>
         </div>
-        <hr>
-        {{ form.value | json  }}
-      </form>
 
+        <a routerLink="/system" href="/system" class="btn btn-black btn-link pull-right back" title="Voltar"><span>Voltar</span></a>
+      </form>
     </div>
   </div>
 

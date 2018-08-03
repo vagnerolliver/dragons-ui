@@ -1,28 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-
 import { ToastrService } from 'ngx-toastr';
+
 import { ErrorHandlerService } from '../../services/errorHandler.service';
 import { SystemService } from '../system.service';
+import { Dragon } from '../model/dragon';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
 
-  page: string;
+  new: boolean;
 
   subscription: Subscription;
   routeSubscription: Subscription;
 
   form: FormGroup;
-  dragon: any = {};
+  dragon: Dragon;
 
   constructor(
+    @Inject(DOCUMENT) public document: any,
     private systemService: SystemService,
     private route: ActivatedRoute,
     private router: Router,
@@ -30,41 +33,47 @@ export class FormComponent implements OnInit {
     private toastr: ToastrService,
     private errorHandler: ErrorHandlerService
   ) {
-    this.createFormBuilder();
+    this.createFormBuilder('constructor');
   }
 
   ngOnInit() {
+    this.document.body.classList.add('page-form');
+
     this.routeSubscription = this.route.params.subscribe(
       (params) => {
         if ( params['slug'] ) {
-          this.page = 'update';
+          this.systemService.addTitle('Editar Dragões');
           this.systemService.slug = params['slug'];
-          this.systemService.addTitle('Editar Dragon');
+          this.new = false;
           this.fetchDragon(params['slug']);
         } else {
-          this.systemService.addTitle('New Dragon');
-          this.page = 'new';
-          this.createFormBuilder();
+          this.systemService.addTitle('Cadastrar Dagrões');
+          this.new = true;
         }
       }
     );
   }
 
-  createFormBuilder() {
+  ngOnDestroy() {
+    this.document.body.classList.remove('page-form');
+    this.routeSubscription.unsubscribe();
+  }
+
+  createFormBuilder(from) {
     this.form =  this.formBuilder.group({
-       name:  [this.dragon.name ? this.dragon.name : ''],
-       type:  [this.dragon.type ? this.dragon.type : ''],
-       histories: [this.dragon.histories ? this.dragon.histories:'']
-     });
+      name: [from === 'subscribe' ? this.dragon.name : ''],
+      type: [from === 'subscribe' ? this.dragon.type : ''],
+      histories: [from === 'subscribe' ? this.dragon.histories : '']
+    });
   }
 
   fetchDragon(slug): void {
     this.subscription = this.systemService.getDragon(slug).subscribe(
-        (data: any) => {
-          this.dragon = data;
-          this.createFormBuilder();
-         },
-        err => console.info(err)
+      (data: any) => {
+        this.dragon = data;
+        this.createFormBuilder('subscribe');
+        },
+      error => this.toastr.error(this.errorHandler.messageTo(error), 'Formulário Dragões')
     );
   }
 
@@ -73,21 +82,21 @@ export class FormComponent implements OnInit {
   }
 
   displayFieldCss(field: string) {
-      return {
-          'has-error': this.isFieldValid(field),
-          'has-feedback': this.isFieldValid(field)
-      };
+    return {
+      'has-error': this.isFieldValid(field),
+      'has-feedback': this.isFieldValid(field)
+    };
   }
 
   validateAllFormFields(formGroup: FormGroup) {
-      Object.keys(formGroup.controls).forEach(field => {
-          const control = formGroup.get(field);
-          if (control instanceof FormControl) {
-              control.markAsTouched({ onlySelf: true });
-          } else if (control instanceof FormGroup) {
-              this.validateAllFormFields(control);
-          }
-      });
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+          control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+          this.validateAllFormFields(control);
+      }
+    });
   }
 
   reset() {
@@ -99,43 +108,26 @@ export class FormComponent implements OnInit {
       const formData = this.form.value;
       const name = this.form.value.name;
 
-      formData['histories']  = this.normalizeChip(formData.histories);
-
-      if ( this.page === 'new') {
+      if (this.new) {
         this.systemService.sendDragonInformation('new', formData).subscribe(
-              (resp) => {
-                this.toastr.success('Adicionado com Sucesso!', `Dragão ${name}`);
-                this.reset();
-                this.systemService.reloadList();
-              },
-              (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Dragons')
-            );
+          resp => {
+            this.toastr.success('Adicionado com Sucesso!', `Dragon ${name}`);
+            this.systemService.reloadList();
+            this.reset();
+          },
+          error => this.toastr.error(this.errorHandler.messageTo(error), 'Formulário Dragões')
+        );
       } else {
         this.systemService.sendDragonInformation('update', formData).subscribe(
-          (resp) => {
+          resp => {
             this.toastr.success('Atualizado com Sucesso!', `Dragão ${name}`);
             this.systemService.reloadList();
           },
-          (error) => this.toastr.error(this.errorHandler.messageTo(error), 'Dragons')
+          error => this.toastr.error(this.errorHandler.messageTo(error), 'Formulário Dragões')
         );
       }
     } else {
       this.validateAllFormFields(this.form);
     }
-  }
-
-  normalizeChip(array) {
-    const newArray = [];
-    array.map(item => {
-        let result;
-        if (typeof item === 'object') {
-            result = item.value;
-        } else {
-            result = item;
-        }
-        newArray.push(result);
-    });
-
-    return newArray;
   }
 }

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="ui-row no-gutters">
       <div class="logo">
-        <h1><a routerLink="" title="Dragons"><img src="../../assets/img/logo.png"></a></h1>
+        <h1 *ngIf="userIsLogged"><a routerLink="/system" href="/system" title="Dragons"><img src="../../assets/img/logo.png"></a></h1>
       </div>
       <div class="nav-item">
         <span class="welcome">Olá {{ userName }}</span>

@@ -2,47 +2,51 @@
 @import "./src/sass/base/variables";
 @import "./src/sass/base/mixins";
 
-:host ::ng-deep { 
+:host ::ng-deep {
   .has-error {
     border: 1px solid red;
   }
-  
-  .box {
-    max-width: 500px; 
+
+  h1 {
+    font-style: italic;
+    font-weight: 600;
   }
 
-  form {
+  .box {
+    @include absolute-center();
+    position: fixed;
+    max-width: 500px;
+    width: 90%;
+  }
+
+  .form {
+    clear: both;
     max-width: 600px;
     margin: auto;
     overflow: hidden;
     margin: 30px auto 0;
 
-    .histories {
-      padding-right: 30px;
-      
-      div {
-        position: relative;
-         
-        & + div {
-          margin-top: 15px;
-        }
-
-        i {
-          @include absolute-center-v();
-          position: absolute;
-          right: -35px;
-        }
-      }
+    .btn {
+      width: 100%;
     }
 
-   
+    .ng2-tag-input,
+    .ng2-tag-input.ng2-tag-input--focused {
+      border-bottom: 1px solid #e0e0e0 !important;
+    }
   }
 
   .back {
-    color: #fff; 
+    color: #fff;
   }
 
   hr {
     clear: both;
+  }
+
+  @media (max-width:480px) {
+    h1 {
+      font-size: 1.3em;
+    }
   }
 }
