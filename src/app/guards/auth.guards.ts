@@ -30,7 +30,6 @@ export class AuthGuard implements CanActivate {
       this.document.body.classList.remove('page-login');
       return true;
     }
-    this.toastr.error('Acesso Negado!', 'Dragons System');
     this.document.body.classList.add('page-login');
     this.router.navigate(['/']);
     return false;
