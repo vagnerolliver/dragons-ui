@@ -75,18 +75,18 @@ export class ListComponent implements OnInit, OnDestroy, DoCheck  {
 
   deleteDragon(slug): void {
     this.subscription = this.systemService.deteleDragon(slug).subscribe(
-        data => {
-          this.toastr.success('Deletado com Sucesso!', 'Lista Dragões');
-          this.paramsPage = 0;
-          this.systemService.reloadList();
-         },
-         error => this.toastr.error(this.errorHandler.messageTo(error), 'Lista Dragões')
-      );
+      data => {
+        this.toastr.success('Deletado com Sucesso!', 'Lista Dragões');
+        this.paramsPage = 0;
+        this.systemService.reloadList();
+        },
+      error => this.toastr.error(this.errorHandler.messageTo(error), 'Lista Dragões')
+    );
   }
 
   buildParams() {
     const paramsObj = {
-        page: this.paramsPage >= 0 ? this.paramsPage : '1',
+      page: this.paramsPage >= 0 ? this.paramsPage : '1',
     };
     return paramsObj;
   }

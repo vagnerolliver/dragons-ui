@@ -72,7 +72,7 @@ export class FormComponent implements OnInit, OnDestroy {
       (data: any) => {
         this.dragon = data;
         this.createFormBuilder('subscribe');
-        },
+      },
       error => this.toastr.error(this.errorHandler.messageTo(error), 'Formulário Dragões')
     );
   }

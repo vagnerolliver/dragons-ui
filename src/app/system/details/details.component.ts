@@ -38,8 +38,8 @@ export class DetailsComponent {
 
   fetchDragon(slug): void {
     this.subscription = this.systemService.getDragon(slug).subscribe(
-        (data: Dragon) => this.dragon = data,
-        error => this.toastr.error(this.errorHandler.messageTo(error), 'Detalhes Dragão')
-      );
+      (data: Dragon) => this.dragon = data,
+      error => this.toastr.error(this.errorHandler.messageTo(error), 'Detalhes Dragão')
+    );
   }
 }
