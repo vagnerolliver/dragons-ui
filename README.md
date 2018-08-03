@@ -14,7 +14,7 @@ obj = {
   password: string
 }
 
-## Fix API
+## Bug Dragons-api
 
 GET/api/dragons
 Api retona cadastros sem "nome" e "slug" e não tem como limpar a base.
@@ -23,13 +23,13 @@ Solução: criar mock com todos os items da base eliminando a sujeira da base pa
 
 ## Installation
 
-# clone the repo
+## clone the repo
 $ git clone https://github.com/vagnerolliver2/dragons-ui my-project
 
-# go into app's directory
+## go into app's directory
 $ cd my-project
 
-# install app's dependencies
+##install app's dependencies
 $ npm install
 
 ## Development server
