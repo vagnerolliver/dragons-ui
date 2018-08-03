@@ -9,14 +9,14 @@ senha: admin
 para add mais usuários editar adicionar user dentro do "mockedUsers"  /services/auth.service.ts
 
 obj = {
-  nome: string,
-  email: string,
+  nome: string,<br>
+  email: string,<br>
   password: string
 }
 
 ## Bug Dragons-api
 
-GET/api/dragons
+GET/api/dragons<br>
 Api retona cadastros sem "nome" e "slug" e não tem como limpar a base.
 
 Solução: criar mock com todos os items da base eliminando a sujeira da base para montar a páginação dentro da aplicação.
