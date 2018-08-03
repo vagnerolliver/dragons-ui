@@ -17,9 +17,9 @@ obj = {
 ## Bug Dragons-api
 
 GET/api/dragons<br>
-Api retona cadastros sem "nome" e "slug" e não tem como limpar a base.
+Api retona registro sem "slug" e não tem como excluir.
 
-Solução: criar mock com todos os items da base eliminando a sujeira da base para montar a páginação dentro da aplicação.
+Solução: criei um mock com todos os registros da base e eliminei essas sujeiras, e apartir dae montei minha própria  páginação dentro da aplicação.
 
 ## Installation
 
