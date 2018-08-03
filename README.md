@@ -1,17 +1,36 @@
 # DragonsUi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
+Sistema que gerencia o cadastro de dragões da api externa https://dragons-api.herokuapp.com/.
 
-Used dependencies
+Dados Login:
+user: admin
+senha: admin
 
-https://www.npmjs.com/package/ngx-order-pipe 
-https://www.npmjs.com/package/ngx-toastr - alert callback error ou sucess
-http://michaelbromley.github.io/ngx-pagination/#/ - paginação da lista de dragões
-https://www.npmjs.com/package/ngx-smart-modal ´- foi útil para exibir os dados do dragão.
+para add mais usuários editar adicionar user dentro do "mockedUsers"  /services/auth.service.ts
 
-Bug no serviço para retornos todos mos pokemons, alguns dos objetos que o serviço retorna não veio com slug e nome, isso acabou dificultando na hora de limpar a base.
+obj = {
+  nome: string,
+  email: string,
+  password: string
+}
 
-Fiz um bff local para limpar esses objetos e montei eu mesmo ma paginação de dados que eu monto no front.
+## Fix API
+
+GET/api/dragons
+Api retona cadastros sem "nome" e "slug" e não tem como limpar a base.
+
+Solução: criar mock com todos os items da base eliminando a sujeira da base para montar a páginação dentro da aplicação.
+
+## Installation
+
+# clone the repo
+$ git clone https://github.com/vagnerolliver2/dragons-ui my-project
+
+# go into app's directory
+$ cd my-project
+
+# install app's dependencies
+$ npm install
 
 ## Development server
 

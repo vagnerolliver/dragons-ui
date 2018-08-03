@@ -9,12 +9,10 @@ export class AuthService {
 
   private mockedUsers = [
     { nome: 'Vágner Silveira',
-      id: '1',
       email: 'vagner.olliver@gmail.com',
       password: '123'
     },
     { nome: 'Administrador',
-      id: '1',
       email: 'admin',
       password: 'admin'
     }
