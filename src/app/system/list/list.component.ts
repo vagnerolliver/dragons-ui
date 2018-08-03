@@ -12,6 +12,7 @@ import { Dragon } from '../model/dragon';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit, OnDestroy, DoCheck  {
+
   subscription: Subscription;
 
   shouldReload: boolean;

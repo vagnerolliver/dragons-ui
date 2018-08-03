@@ -16,10 +16,10 @@ import { Dragon } from '../model/dragon';
 })
 export class FormComponent implements OnInit, OnDestroy {
 
-  new: boolean;
-
   subscription: Subscription;
   routeSubscription: Subscription;
+
+  new: boolean;
 
   form: FormGroup;
   dragon: Dragon;

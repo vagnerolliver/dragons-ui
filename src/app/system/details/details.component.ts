@@ -14,6 +14,7 @@ import { Dragon } from '../model/dragon';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent {
+
   subscription: Subscription;
 
   dragon;
