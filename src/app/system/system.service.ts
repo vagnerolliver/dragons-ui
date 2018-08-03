@@ -73,10 +73,7 @@ export class SystemService {
 
   normalizeChip(array) {
     return array.map(item => {
-      if (typeof item === 'object') {
-          return item.value;
-      }
-      return item;
-   });
+      return (!!item.value) ? item.value : item;
+    });
   }
 }
