@@ -65,8 +65,8 @@ export class ListComponent implements OnInit, OnDestroy, DoCheck  {
     this.paramsPage = i;
     this.systemService.getDragons(this.buildParams()).subscribe(
       (data: any) => {
-        data.items.forEach((dragon, index) => {
-          if (dragon.name.trim().length > 0 ) {
+        data.items.forEach((dragon) => {
+          if (dragon.slug.trim().length > 0 ) {
             this.dragons.push(dragon);
           }
         });
@@ -80,7 +80,7 @@ export class ListComponent implements OnInit, OnDestroy, DoCheck  {
         this.toastr.success('Deletado com Sucesso!', 'Lista Dragões');
         this.paramsPage = 0;
         this.systemService.reloadList();
-        },
+      },
       error => this.toastr.error(this.errorHandler.messageTo(error), 'Lista Dragões')
     );
   }
